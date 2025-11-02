@@ -1,0 +1,109 @@
+:root {
+    --bg-light: #ffffff;
+    --bg-dark:  #000000;
+    --fg-light: #000000;
+    --fg-dark:  #ffffff;
+  
+    --max-logo: 360px;     /* logo hard cap */
+    --gap: 24px;
+  
+    /* === Transition controls === */
+    --dur-bg: 800ms;       /* 배경/문자색 전환 시간 */
+    --dur-ui: 220ms;       /* UI(로고/메뉴) 페이드 시간 */
+    --ease: cubic-bezier(.4, 0, .2, 1);
+  }
+  
+  /* Reset (tiny) */
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body { margin: 0; font-family: var(--mono); }
+  button { font: inherit; }
+  
+  /* Stage controls both screens via a state class */
+  .stage {
+    position: relative;
+    min-height: 100dvh;
+    /* 배경/글자색 전환 */
+    transition:
+      background-color var(--dur-bg) var(--ease),
+      color            var(--dur-bg) var(--ease);
+  }
+  .stage[data-state="logo"] { background: var(--bg-light); color: var(--fg-light); }
+  .stage[data-state="menu"] { background: var(--bg-dark);  color: var(--fg-dark);  }
+  
+  /* Centered square logo */
+  .logo-button {
+    position: fixed; inset: 0; margin: auto;
+    display: grid; place-items: center;
+    width:  min(60vmin, var(--max-logo));
+    height: min(60vmin, var(--max-logo));
+    background: transparent; border: 0; padding: 0; cursor: pointer;
+  
+    /* 메뉴가 뜰 때 살짝 페이드아웃 */
+    transition: opacity var(--dur-ui) var(--ease);
+  }
+  .logo-button img {
+    width: 100%; height: 100%;
+    object-fit: contain; display: block;
+  }
+  .stage[data-state="menu"] .logo-button {
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+  /* Menu overlay */
+  .menu {
+    position: fixed; inset: 0;
+    display: grid; place-items: center;
+  
+    /* 기본은 숨김 + 클릭 불가 */
+    opacity: 0; pointer-events: none;
+  
+    /* 페이드인/아웃 */
+    transition: opacity var(--dur-ui) var(--ease);
+  }
+  .stage[data-state="menu"] .menu {
+    opacity: 1; pointer-events: auto;
+  }
+  
+  /* Menu list */
+  .menu-list {
+    list-style: none; margin: 0; padding: 0; text-align: center;
+  }
+  .menu-list a {
+    display: inline-block; text-decoration: none; color: inherit;
+    font-size: clamp(10px, 2.5vmin, 22px);
+    padding: 0; line-height: 1.2;
+    border-bottom: 1px solid transparent;
+    transition: border-color 150ms ease;
+  }
+  .menu-list a:hover,
+  .menu-list a:focus-visible {
+    border-bottom-color: currentColor; outline: none;
+  }
+  .menu-list li + li { margin-top: 4px; }
+  
+  /* (close 버튼을 HTML에서 제거했다면 이 블록은 무시됨)
+  .close { position: fixed; bottom: var(--gap); right: var(--gap);
+    background: transparent; color: currentColor; border: 1px solid currentColor;
+    padding: 6px 10px; border-radius: 6px; opacity: .6;
+  }
+  .close:hover { opacity: 1; }
+  */
+  
+  /* Motion-reduced: 전환 효과 제거 */
+  @media (prefers-reduced-motion: reduce) {
+    .stage, .menu, .logo-button { transition: none !important; }
+  }
+  
+  /* Ensure white/black full-bleed on mobile UI chrome */
+  @supports (height: 100svh) {
+    .stage { min-height: 100svh; }
+  }
+  
+  /* 모바일 환경에서 전체 폰트 1.2배 */
+@media (max-width: 600px) {
+    body {
+      font-size: 1.2em;        /* 모든 텍스트 크기 1.2배 확대 */
+    }
+  }

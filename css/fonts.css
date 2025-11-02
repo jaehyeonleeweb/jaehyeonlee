@@ -1,0 +1,19 @@
+/* Self-host Roboto Mono — download from Google Fonts and place woff2 files in /fonts */
+@font-face {
+    font-family: "Roboto Mono";
+    src: url("/fonts/RobotoMono-VariableFont_wght.woff2") format("woff2-variations");
+    font-weight: 100 700;
+    font-style: normal;
+    font-display: swap;
+    }
+    @font-face {
+    font-family: "Roboto Mono";
+    src: url("/fonts/RobotoMono-Italic-VariableFont_wght.woff2") format("woff2-variations");
+    font-weight: 100 700;
+    font-style: italic;
+    font-display: swap;
+    }
+    
+    
+    /* Fallback stack */
+    :root { --mono: "Roboto Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; }

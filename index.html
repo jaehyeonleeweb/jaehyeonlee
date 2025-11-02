@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>JAE HYEON LEE</title>
+  <meta name="color-scheme" content="light dark" />
+  <!-- 상대경로로 수정 -->
+  <link rel="preload" href="fonts/RobotoMono-VariableFont_wght.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main id="app" class="stage" data-state="logo">
+    <!-- Centered Logo Screen (white background) -->
+    <button id="logoBtn" class="logo-button" aria-haspopup="true" aria-controls="menu" aria-label="Open links">
+      <!-- 상대경로로 수정 -->
+      <img src="assets/logo.png" alt="j-h logo" width="600" height="600" />
+    </button>
+
+    <!-- Fullscreen Menu (black background) -->
+    <nav id="menu" class="menu" aria-hidden="true">
+      <ul class="menu-list" role="list">
+        <!-- Replace hrefs with your links -->
+        <li><a href="https://j-h-a-r-c-h-i-v-e.com" target="_blank" rel="noopener">ONLINE-ARCHIVE</a></li>
+        <li><a href="https://instagram.com/jae.hyeon.lee/" target="_blank" rel="noopener">INSTAGRAM</a></li>
+        <li><a href="https://youtube.com/@jaehyeonleeyt" target="_blank" rel="noopener">YOUTUBE</a></li>
+        <li><a href="https://soundcloud.com/jaehyeonlee" target="_blank" rel="noopener">SOUNDCLOUD</a></li>
+        <li><a href="https://jaehyeonlee.bandcamp.com/" target="_blank" rel="noopener">BANDCAMP</a></li>
+      </ul>
+    </nav>
+  </main>
+
+  <!-- 상대경로로 수정 -->
+  <script src="js/app.js"></script>
+</body>
+</html>
